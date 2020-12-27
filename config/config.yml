@@ -1,0 +1,14 @@
+# Prometheus configuration. If any absent then used below default values.
+prometheus:
+  host: localhost
+  port: 9090
+# Graphite or any other like reciever configuration. If any absent then used below default values.
+graphite:
+  host: localhost
+  port: 2003
+# Time configuration. If any absent then used below default values.
+time:
+  # Time for send metrics data in seconds.
+  disconnect: 10
+  # Period of metric send.
+  repeat: 1m
