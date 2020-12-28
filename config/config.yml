@@ -15,4 +15,4 @@ time:
   # Time for send metrics data in seconds.
   disconnect: 10
   # Period of metric send.
-  repeat: 1m
+  repeat: 10m
