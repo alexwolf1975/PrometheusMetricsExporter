@@ -3,17 +3,20 @@ import yaml
 config = {
     'prometheus': {
         'host': 'localhost',
-        'port': '9090'
-        },
+        'port': '9090',
+        'prefix': 'prometheus.'
+    },
     'graphite': {
         'host': 'localhost',
-        'port': '2003'
-        },
+        'port': '2003',
+        'prefix': 'graphite.'
+    },
     'time': {
         'disconnect': '10',
         'repeat': '1m'
-        }
     }
+}
+
 
 def conf_update(old, new):
     for k in new:
@@ -22,12 +25,16 @@ def conf_update(old, new):
         else:
             old[k] = new[k]
 
+
+def conf_export(dictionary, prefix=[]):
+    for k in dictionary:
+        if isinstance(dictionary[k], dict):
+            conf_export(dictionary[k], prefix + [k])
+        else:
+            print('_'.join(prefix + [k]) + '="{}"'.format(dictionary[k]))
+
+
 with open('config/config.yml') as f:
     conf_update(config, yaml.load(f, Loader=yaml.FullLoader))
 
-print('prometheus_host="{}"'.format(config['prometheus']['host']))
-print('prometheus_port="{}"'.format(config['prometheus']['port']))
-print('graphite_host="{}"'.format(config['graphite']['host']))
-print('graphite_port="{}"'.format(config['graphite']['port']))
-print('time_disconnect="{}"'.format(config['time']['disconnect']))
-print('time_repeat="{}"'.format(config['time']['repeat']))
+conf_export(config)

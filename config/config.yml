@@ -2,10 +2,14 @@
 prometheus:
   host: localhost
   port: 9090
+  # Prefix for exported metrics.
+  prefix: 'prometheus.'
 # Graphite or any other like reciever configuration. If any absent then used below default values.
 graphite:
   host: localhost
   port: 2003
+  # Prefix for incoming metrics.
+  prefix: 'graphite.'
 # Time configuration. If any absent then used below default values.
 time:
   # Time for send metrics data in seconds.
